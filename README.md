@@ -25,7 +25,7 @@
 SEANA is a drop-in view generation module for joint-embedding SSL on noisy images.
 It learns an invertible variance-stabilizing transform from noisy training data,
 estimates the clean signal with a frozen denoiser, and resamples independent noise to
-create two noise-aware SSL views. Your encoder, SSL objective, and remaining augmentation pipeline stay the same. You then don't need to use a denoiser or SEANA module at inference :)
+create two noise-aware SSL views. Your encoder, SSL objective, and remaining augmentation pipeline stay the same. You then don't need to use a denoiser or SEANA module at inference, and also don't need to train a dataset-specific denoiser :)
 
 | Learn from noisy data | Use your SSL pipeline | Fit once, reuse |
 | :--- | :--- | :--- |
