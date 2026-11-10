@@ -1,6 +1,6 @@
 # SEANA: Self-Aligned Noise Augmentation
 
-## Noise-aligned views for self-supervised learning
+### Noise-aligned views for self-supervised learning
 
 Self-Aligned Noise Augmentation (SEANA) is a noise-aware view generation module that is plug-and-play for joint-embedding / latent Self-Supervised Learning (SSL) pipelines.
 
