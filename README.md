@@ -33,66 +33,71 @@ create two noise-aware SSL views. Your encoder, SSL objective, and remaining aug
 
 ## Quick start
 
-Install the reusable library into a uv project:
+Install SEANA and LightlySSL into a uv project:
 
 ```bash
-uv add seana-ssl
+uv add seana-ssl lightly torchvision
 ```
 
-With pip, use `python -m pip install seana-ssl`. The package is **`seana-ssl`**,
-and the Python import is **`seana`**. Python 3.10+ is supported.
+With pip, use `python -m pip install seana-ssl lightly torchvision`. The SEANA
+package is **`seana-ssl`**, and the Python import is **`seana`**. Python 3.10+
+is supported.
 
-Use a loader of original noisy training images, converted to floating tensors
-before SSL augmentations or encoder normalization:
+This LightlySSL SimCLR example fits SEANA once, then runs one SSL training epoch.
+Supply `noisy_train_loader` with batches of original noisy images as floating
+tensors in [0, 1], shaped `[B, 3, H, W]`, followed by labels or other metadata.
+Use at least two images per batch. Keep SSL augmentations and encoder
+normalization out of this loader:
 
 ```python
 import torch
+from torch import nn
+from torchvision.models import resnet18
+from lightly.loss import NTXentLoss
+from lightly.models.modules import SimCLRProjectionHead
+from lightly.transforms import SimCLRViewTransform
 from seana import SEANA
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-augmenter = SEANA(sigma_d=0.08, sigma_vst=0.1, device=device)
 
-# noisy_train_loader yields (images, labels), with images shaped [B, 3, H, W].
 # Fit once on the training split. Labels are ignored.
+augmenter = SEANA(sigma_d=0.08, sigma_vst=0.1, device=device)
 augmenter.fit(noisy_train_loader, steps=5000, patch_size=64, seed=0)
 
-for images, _ in noisy_train_loader:
+# Set up a standard LightlySSL SimCLR pipeline.
+ssl_view = SimCLRViewTransform(input_size=224)
+resnet = resnet18(weights=None)
+model = nn.Sequential(
+    *list(resnet.children())[:-1],
+    nn.Flatten(1),
+    SimCLRProjectionHead(512, 512, 128),
+).to(device).train()
+criterion = NTXentLoss(temperature=0.5)
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+
+for images, *_ in noisy_train_loader:
+    # SEANA first, then independent Lightly augmentations for each source.
     source_a, source_b = augmenter(images.to(device))
-    # Apply your usual SSL transforms independently to each source,
-    # then pass the resulting views to your SSL model.
+    view_a = torch.stack([ssl_view(image) for image in source_a])
+    view_b = torch.stack([ssl_view(image) for image in source_b])
+
+    optimizer.zero_grad(set_to_none=True)
+    loss = criterion(model(view_a), model(view_b))
+    loss.backward()
+    optimizer.step()
 ```
+
+Cropping, photometric augmentation and normalization happen **after SEANA**.
+The fitted SEANA module stays frozen while the encoder and projection head train.
 
 `SEANA()` uses frozen pretrained DRUNet, downloading its weights on first use.
 `SEANA(my_denoiser)` uses your own module. The example strengths are starting
 values, not a universal recipe. The [library guide](docs/library.md) covers
 input scaling, fitting, custom denoisers, resampling strength and checkpoints.
 
-<details>
-<summary><strong>Integrate with LightlySSL</strong></summary>
-
-Add Lightly to your environment with `uv add lightly torchvision`. After fitting
-SEANA, use a single-view transform on each independently resampled source:
-
-```python
-from lightly.transforms import SimCLRViewTransform
-
-ssl_view = SimCLRViewTransform(input_size=224)
-
-# Inside your existing SSL training loop:
-source_a, source_b = augmenter(images.to(device))
-view_a = torch.stack([ssl_view(image) for image in source_a])
-view_b = torch.stack([ssl_view(image) for image in source_b])
-```
-
-This keeps cropping, photometric augmentation and normalization **after SEANA**.
-The [complete SimCLR example](examples/ssl_pipeline.py) includes a ResNet-18
-backbone, Lightly's projection head and NT-Xent loss. From a repository checkout:
-
-```bash
-uv run --python 3.12 --extra experiments examples/ssl_pipeline.py
-```
-
-</details>
+The [runnable LightlySSL example](examples/ssl_pipeline.py) also provides a toy
+dataset and checkpoint saving. From a repository checkout, run
+`uv run --python 3.12 --extra experiments examples/ssl_pipeline.py`.
 
 ## Try the Colab demo
 
