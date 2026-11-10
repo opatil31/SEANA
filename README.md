@@ -27,13 +27,9 @@ It learns an invertible variance-stabilizing transform from noisy training data,
 estimates the clean signal with a frozen denoiser, and resamples independent noise to
 create two SSL views. Your encoder, SSL objective and remaining augmentation pipeline stay the same.
 
-<p align="center">
-  <img src="docs/assets/seana-pipeline.svg" width="100%" alt="A noisy training image enters SEANA: learned VST, frozen denoising, independent noise resampling and inverse VST. The two resulting source views each receive their own SSL transforms before entering the encoder.">
-</p>
-
 | Learn from noisy data | Use your SSL pipeline | Fit once, reuse |
 | :--- | :--- | :--- |
-| No clean training targets or noise-model specification required. | Generate independent sources before your usual crops, color transforms and normalization. | Pretrained DRUNet is the default. Save the fitted module, or supply your own denoiser. |
+| No clean training targets or noise-model specification required. | Generate independent source views before your usual crops, color transforms and normalization. | Pretrained DRUNet is the default. Save the fitted module, or supply your own denoiser. |
 
 ## Quick start
 
