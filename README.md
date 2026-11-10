@@ -65,33 +65,12 @@ It includes a resampling-strength slider, real fluorescence images, captured
 results, and a live baseline-versus-SEANA SSL comparison using `seana-ssl` from PyPI.
 Both arms default to **50 SSL epochs and 20 linear-probe epochs**, which is less than main paper btw.
 
+--------------------------------------------------------
 Code for **Breaking Noise Shortcuts in Self-Supervised Learning via Noise-Aligned
 View Generation**, by Oankar R. Patil.
 
-
-The method implementation is [seana.py](seana.py) at the repository root. This
-release covers VICReg, SimCLR, BYOL, MoCoV2 and LeJEPA on noisy CIFAR-10 and ImageNet-100 with
-ResNet-18 and ResNet-50. Each model supports four treatments: ordinary noisy
-views (`baseline`), SEANA (`seana`), Next-Scale Prediction (`nsp`) SSL denoising, and Neighbor2Neighbor (`n2n`) SSL denoising, integrated with the project's dataset recipes.
-
-The separate [BBBC048 fluorescence-imaging experiments](fluorescence_imaging_bbbc048/README.md)
-add the same five SSL models, NSP/N2N, VST-only and resampling-only component
-ablations.
-
-The [fetal ultrasound experiments](fetal_ultrasound/README.md) add the five SSL
-models on FETAL_PLANES_DB, baseline/NSP/SEANA comparisons, anatomical and device
-metrics, and a separate patient-validation strength sweep. 
-
 **Both real-imaging
-datasets include a single-file prepared dataset in their experiment folder.**
-
-**Synthetic-benchmark evaluation protocol:** pretrain the backbone on noisy images, freeze it, fit a
-linear classifier using noisy training images, then evaluate on **clean test
-images** (the validation split for ImageNet-100). For **N2N and NSP**, the fitted,
-frozen denoiser preprocesses the noisy probe-training images. Clean test images
-go directly to the frozen backbone, with the usual normalization and no denoising.
-Baseline and SEANA use noisy probe-training images directly. No probe uses the
-SSL projection head or noise resampling.
+datasets from the paper include a single-file prepared dataset in their experiment folder.**
 
 ## Research installation
 
