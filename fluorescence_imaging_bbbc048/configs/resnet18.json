@@ -1,0 +1,8 @@
+{
+  "backbone": "resnet18",
+  "epochs": 200,
+  "probe_epochs": 100,
+  "image_size": 64,
+  "view_order": "paper",
+  "probe_inputs": "historical"
+}

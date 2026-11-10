@@ -1,0 +1,30 @@
+{
+  "baseline": {
+    "simclr": "simclr_baseline_native192",
+    "vicreg": "vicreg_baseline_native192",
+    "byol": "byol_baseline_native192",
+    "moco": "moco_baseline_native192",
+    "lejepa": "lejepa_baseline_2v_wd1em6_lam0p05_native192"
+  },
+  "seana": {
+    "simclr": "simclr_seana_sv0p16_native192_dn08",
+    "vicreg": "vicreg_seana_sv0p16_native192_dn08",
+    "byol": "byol_seana_sv0p12_native192_dn08",
+    "moco": "moco_seana_sv0p04_native192_dn08",
+    "lejepa": "lejepa_seana_sv0p24_tuned_2v_native192_dn08"
+  },
+  "nsp": {
+    "simclr": "simclr_nsp_native192",
+    "vicreg": "vicreg_nsp_native192",
+    "byol": "byol_nsp_native192",
+    "moco": "moco_nsp_native192",
+    "lejepa": "lejepa_nsp_native192"
+  },
+  "source": "agg_fetal_perclass.py",
+  "metric": "probe_final_macro_f1",
+  "seeds": [
+    0,
+    1,
+    2
+  ]
+}

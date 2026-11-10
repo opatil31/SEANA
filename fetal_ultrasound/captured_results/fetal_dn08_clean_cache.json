@@ -1,0 +1,12 @@
+{
+  "n": 7129,
+  "image_size": 192,
+  "vst_ckpt": "datasets/seana_fetal_dn08_global_knots128.pt",
+  "vst_type": "learned",
+  "fingerprint": "fc62c213bdbcb14abad1ea4a71f021a1897a5ea3",
+  "denoiser": "drunet",
+  "drunet_sigma": 0.08,
+  "vst_snr": 21.753643940925496,
+  "sigma_vst_rule": 0.3231977943231621,
+  "vst_dev_span": 0.09923341125249863
+}

@@ -1,0 +1,8 @@
+{
+  "treatment": "seana",
+  "split_mode": "official",
+  "sigma_mode": "unsupervised",
+  "sigma_multiplier": 1.0,
+  "sigma_rule_max_batches": 50,
+  "sigma_d": 0.08
+}

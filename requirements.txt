@@ -1,0 +1,7 @@
+# Install the matching CUDA/CPU PyTorch wheels for your machine first.
+torch==2.5.1
+torchvision==0.20.1
+lightly==1.5.25
+deepinv==0.4.1
+numpy>=1.26,<3
+pillow>=10,<14

@@ -1,0 +1,7 @@
+{
+  "methods": ["byol", "vicreg", "simclr"],
+  "sigma_vst": [0.01, 0.05, 0.1, 0.2, 0.4, 0.6, 0.8, 1.0, 1.5, 2.0],
+  "source": "Captured generate_bbbc048_extra.py and sigma_semantic.py; paper Fig. 4 / Appendix G",
+  "reference_seed": 0,
+  "reference_results": "../resampling_strength_sweep/paper_reference.csv"
+}

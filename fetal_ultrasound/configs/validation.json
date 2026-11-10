@@ -1,0 +1,7 @@
+{
+  "split_mode": "official_validation",
+  "split_seed": 0,
+  "validation_fraction": 0.1,
+  "probe_selection": "validation_macro_f1",
+  "evaluate_test": false
+}

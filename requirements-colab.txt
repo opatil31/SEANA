@@ -1,0 +1,9 @@
+# Keep the Colab runtime's matching torch/torchvision and NumPy installations.
+# The notebook adds constraints for those installed versions before invoking pip.
+seana-ssl==0.1.3
+lightly==1.5.25
+deepinv==0.4.1
+matplotlib>=3.8,<4
+ipywidgets>=8,<9
+pillow>=10,<14
+tqdm>=4.66,<5

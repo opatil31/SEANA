@@ -1,0 +1,49 @@
+{
+  "file": "fetal_planes_native192_v1.zip",
+  "bytes": 251910029,
+  "sha256": "381dd62ac1e92178f7aa1d8326b008fd04f99b4f111084d6474fd4fee0a3d3ce",
+  "images": 12400,
+  "shape": [
+    12400,
+    192,
+    192
+  ],
+  "fingerprint": "b0b671e87c446cf1ae9def05c78257c0fe712e69f0c17924bca11b1d268404fd",
+  "license": "CC-BY-4.0",
+  "splits": [
+    {
+      "mode": "official",
+      "seed": 0,
+      "images": {
+        "train": 7129,
+        "validation": 0,
+        "test": 5271
+      },
+      "patients": {
+        "train": 896,
+        "validation": 0,
+        "test": 896
+      }
+    },
+    {
+      "mode": "official_validation",
+      "seed": 0,
+      "images": {
+        "train": 6341,
+        "validation": 788,
+        "test": 5271
+      },
+      "patients": {
+        "train": 806,
+        "validation": 90,
+        "test": 896
+      }
+    }
+  ],
+  "capture_date": "2026-11-06",
+  "captured_source": "delta/datasets/fetal",
+  "upstream_doi": "10.5281/zenodo.3904280",
+  "source_csv_sha256": "18f8250244dd7ee312b6444fdc5285f4adca47f784d4a68d991464b4a15c3679",
+  "storage": "Git LFS; one lossless ZIP file",
+  "source_loader_sha256": "9f0cf73b264e305810ae3dca398cbb037d64d7a33d122636e183f693b35d1708"
+}

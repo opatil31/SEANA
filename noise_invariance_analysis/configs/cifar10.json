@@ -1,0 +1,10 @@
+{
+  "n_images": 2000,
+  "k_reps": 8,
+  "retrieval_images": 500,
+  "batch_size": 512,
+  "seed": 0,
+  "prepool": false,
+  "save_features": false,
+  "download": false
+}

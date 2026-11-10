@@ -1,0 +1,12 @@
+{
+  "backbone": "resnet18",
+  "epochs": 100,
+  "batch_size": 256,
+  "probe_epochs": 100,
+  "probe_batch_size": 256,
+  "noise_sampling": "stochastic",
+  "probe_train_inputs": "noisy",
+  "probe_test_inputs": "clean",
+  "probe_report_best": false,
+  "seana_type": "conditional"
+}

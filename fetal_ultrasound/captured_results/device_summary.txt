@@ -1,0 +1,18 @@
+TEST device support: seen(E6+Aloka)=4143  S10=1071  (E6=2406 Aloka=1737)
+  method     treat  n | mine-ovr reported |    seen     S10 | S10-seen
+    byol  baseline  3 |   75.06%   75.04% |  79.77%  57.21% | -22.56
+    byol       NSP  (no backbone: byol_nsp_native192)
+    byol     SEANA  3 |   76.31%   76.27% |  80.11%  62.00% | -18.11
+  simclr  baseline  3 |   71.40%   71.42% |  76.44%  52.26% | -24.19
+  simclr       NSP  (no backbone: simclr_nsp_native192)
+  simclr     SEANA  3 |   75.30%   75.32% |  79.50%  59.23% | -20.27
+  vicreg  baseline  3 |   70.90%   70.94% |  76.01%  52.10% | -23.91
+  vicreg       NSP  (no backbone: vicreg_nsp_native192)
+  vicreg     SEANA  3 |   73.43%   73.38% |  77.55%  57.98% | -19.57
+  lejepa  baseline  1 |   72.02%   72.12% |  77.58%  51.17% | -26.41
+  lejepa       NSP  (no backbone: lejepa_nsp_native192)
+  lejepa     SEANA  1 |   73.55%   73.85% |  76.90%  60.88% | -16.02
+    moco  baseline  3 |   73.62%   73.81% |  77.01%  60.85% | -16.16
+    moco       NSP  (no backbone: moco_nsp_native192)
+    moco     SEANA  3 |   73.96%   73.96% |  77.21%  61.78% | -15.43
+DONE

@@ -1,0 +1,70 @@
+{
+  "file": "bbbc048_merged_v1.zip",
+  "bytes": 54272909,
+  "sha256": "3174f5672d721c98255ac16254c822a71efd0b934e4487bdab0702f2ec645ce1",
+  "cells": 32266,
+  "class_counts": {
+    "G1": 14333,
+    "G2": 8601,
+    "S": 8616,
+    "anaphase": 15,
+    "metaphase": 68,
+    "prophase": 606,
+    "telophase": 27
+  },
+  "dataset": "BBBC048 v1",
+  "fingerprint": "7f5ab8f3075f74826ff5f7c7c517c8eb4d4f4cd284511c833380831c662586cc",
+  "format": "seana_bbbc048_archive",
+  "image_processing": "Original image bytes, without re-encoding or resizing",
+  "label_source": "phase_directory",
+  "layout": "merged",
+  "license": "CC-BY-NC-SA-3.0",
+  "schema_version": 1,
+  "split_provenance": "Reconstructed from the captured cell ordering and split algorithm; historical run-specific membership files were not available.",
+  "splits": [
+    {
+      "mode": "random",
+      "seed": 0,
+      "test": 6453,
+      "train": 25813,
+      "train_fraction": 0.8
+    },
+    {
+      "mode": "random",
+      "seed": 1,
+      "test": 6453,
+      "train": 25813,
+      "train_fraction": 0.8
+    },
+    {
+      "mode": "random",
+      "seed": 2,
+      "test": 6453,
+      "train": 25813,
+      "train_fraction": 0.8
+    },
+    {
+      "mode": "acquisition_order",
+      "seed": 0,
+      "test": 6453,
+      "train": 25813,
+      "train_fraction": 0.8
+    },
+    {
+      "mode": "acquisition_order_global",
+      "seed": 0,
+      "test": 6453,
+      "train": 25813,
+      "train_fraction": 0.8
+    }
+  ],
+  "capture_date": "2026-11-06",
+  "captured_source": "delta/datasets/bbbc048/CellCycle",
+  "native_image_shape": [
+    66,
+    66,
+    3
+  ],
+  "native_image_format": "RGB JPEG",
+  "ground_truth_source": "Captured Ground_truth.lst; label assignment follows phase folders"
+}

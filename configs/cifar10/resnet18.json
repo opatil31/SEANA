@@ -1,0 +1,9 @@
+{
+  "backbone": "resnet18",
+  "epochs": 200,
+  "probe_epochs": 100,
+  "batch_size": 256,
+  "noise_sampling": "stochastic",
+  "probe_train_inputs": "noisy",
+  "probe_test_inputs": "clean"
+}

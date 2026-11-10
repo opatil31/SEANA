@@ -1,0 +1,28 @@
+{
+  "origin": "captured_results_not_new_reproduction",
+  "main_checkpoints": 211,
+  "overlapping_gauss_high_rows_not_double_counted": 21,
+  "additional_sigma_sweep_checkpoints": 18,
+  "arms": {
+    "analyticalvst": 18,
+    "baseline": 30,
+    "drunet_resample": 18,
+    "n2n": 28,
+    "n2n_resample": 18,
+    "nsp": 18,
+    "nsp_resample": 18,
+    "oracle": 18,
+    "oracle_postcrop": 18,
+    "seana": 27
+  },
+  "primary_metric": "noise_variance_fraction = S_W/(S_W+S_B) = 1-eta_squared",
+  "captured_eff_rank": "effective_rank_entropy of per-image mean covariance",
+  "participation_ratio": "not recoverable from the stored scalar ranks",
+  "icc_1_1_trace": "derived per checkpoint from stored S_W, S_B, N and K; distinct from ndv",
+  "aggregation": "arithmetic means of per-checkpoint metrics; counts and members included",
+  "retrieval_images": [
+    500
+  ],
+  "evaluation_seed": "not recorded in CSV; captured script default is 0",
+  "checkpoint_hashes": "not recorded in historical CSVs"
+}

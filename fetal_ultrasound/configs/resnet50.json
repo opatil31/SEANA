@@ -1,0 +1,10 @@
+{
+  "backbone": "resnet50",
+  "split_mode": "official",
+  "view_order": "shared",
+  "image_size": 128,
+  "region_size": 192,
+  "epochs": 200,
+  "probe_epochs": 100,
+  "sigma_d": 0.08
+}

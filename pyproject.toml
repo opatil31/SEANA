@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seana-ssl"
+version = "0.1.3"
+description = "Noise-aligned view generation for self-supervised learning"
+readme = "docs/library.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Oankar R. Patil"}]
+keywords = ["self-supervised-learning", "augmentation", "denoising", "pytorch"]
+dependencies = ["torch>=2.5.1,<3", "deepinv==0.4.1"]
+
+[project.urls]
+Publication = "https://neurips.cc/virtual/2026/loc/sydney/poster/153415"
+
+[project.optional-dependencies]
+# Compatibility alias. DRUNet support is included in the base install.
+drunet = []
+# Install these to run research scripts from the checkout. Experiment code and
+# datasets are not included in the library wheel.
+experiments = [
+    "torch==2.5.1", "torchvision==0.20.1", "lightly==1.5.25", "deepinv==0.4.1",
+    "numpy>=1.26,<3", "pillow>=10,<14",
+]
+imagenet100 = ["datasets==4.4.1"]
+bbbc048 = ["tifffile==2024.8.30"]
+demo = ["ipywidgets>=8,<9", "matplotlib>=3.8,<4", "tqdm>=4.66,<5"]
+
+[dependency-groups]
+notebooks = ["nbformat>=5.10,<6", "nbclient>=0.10,<1", "ipykernel>=6,<8"]
+
+[tool.uv]
+default-groups = []
+
+[tool.setuptools]
+py-modules = ["seana", "_seana_api"]
+packages = []
+include-package-data = false
+

@@ -1,0 +1,4 @@
+condition,arm,noise_variance_fraction,s_w,s_b,effective_rank_entropy,content_reid,n_checkpoints,members,aggregation
+gauss_high,baseline,0.11468295711434243,144.25133005777994,1048.886454264323,31.195548879340883,0.7866666515668234,3,byol:s0|simclr:s0|vicreg:s0,matched_method_seed
+gauss_high,nsp,0.2061985075404927,42.61737950642904,174.5940729777018,7.080710027296312,0.2473333328962326,3,byol:s0|simclr:s0|vicreg:s0,matched_method_seed
+gauss_high,seana,0.06321143086936623,83.10402552286784,1215.6407063802083,23.471099101820933,0.899999996026357,3,byol:s0|simclr:s0|vicreg:s0,matched_method_seed

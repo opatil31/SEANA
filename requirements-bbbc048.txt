@@ -1,0 +1,2 @@
+-r requirements.txt
+tifffile==2024.8.30

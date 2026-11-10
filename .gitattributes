@@ -1,0 +1,1 @@
+fetal_ultrasound/dataset/fetal_planes_native192_v1.zip filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,15 @@
+{
+  "treatment": "seana",
+  "epochs": 200,
+  "probe_epochs": 100,
+  "batch_size": 128,
+  "image_size": 64,
+  "split_mode": "random",
+  "split_seed": 0,
+  "train_fraction": 0.8,
+  "view_order": "paper",
+  "probe_inputs": "historical",
+  "sigma_d": 0.039,
+  "seana_fit_steps": 5000,
+  "seana_knots": 128
+}

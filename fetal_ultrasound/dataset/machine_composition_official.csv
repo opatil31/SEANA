@@ -1,0 +1,13 @@
+split,machine,images,patients,percent_of_split,total_split_images
+train,Aloka,3377,387,47.369897601346615,7129
+train,Other,285,96,3.997755645953149,7129
+train,Voluson E6,3456,416,48.47804741197924,7129
+train,Voluson S10,11,1,0.15429934072099874,7129
+validation,Aloka,0,0,,0
+validation,Other,0,0,,0
+validation,Voluson E6,0,0,,0
+validation,Voluson S10,0,0,,0
+test,Aloka,1737,389,32.95389869095048,5271
+test,Other,57,28,1.0813887307911212,5271
+test,Voluson E6,2406,391,45.6459874786568,5271
+test,Voluson S10,1071,90,20.318725099601593,5271

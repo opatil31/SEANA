@@ -1,0 +1,6 @@
+# Library source distribution: experiment repository assets are released separately.
+global-exclude *
+include pyproject.toml MANIFEST.in LICENSE CITATION.cff THIRD_PARTY_NOTICES.md
+include seana.py _seana_api.py uv.lock
+include docs/library.md
+include examples/ssl_pipeline.py

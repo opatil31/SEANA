@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "source_file": "probe_noise_encoding.py",
+      "sha256": "da1733f6a086a95831bd02c205d10832cd2af51f4dd98a0912452c5b11baaf39",
+      "bytes": 11945,
+      "snapshot_date": "2026-11-06"
+    },
+    {
+      "source_file": "noise_encoding_probe_writeup.md",
+      "sha256": "6e4df18eea7c72766d96760cfaa78ce17573565dc13992a6d789dc22eb76dd31",
+      "bytes": 6855,
+      "snapshot_date": "2026-11-06"
+    }
+  ],
+  "consolidated_from": "probe_noise_encoding.py",
+  "corrections": {
+    "ndv": "noise_variance_fraction = 1-eta_squared, distinct from conventional ICC(1,1)",
+    "eff_rank": "entropy effective rank, distinct from participation ratio",
+    "retrieval_chance": "0.002 in captured CSVs, implying a 500-image gallery"
+  },
+  "limits": [
+    "No checkpoint hashes or exact launch arguments were saved in the captured CSVs.",
+    "The CSV seed is the training seed; analysis seed and selected test indices were not saved.",
+    "The source snapshot is not proof of the exact source revision for every historical run.",
+    "Captured scalars can yield conventional trace-pooled ICC, but cannot recover participation ratio without embeddings or an eigenspectrum."
+  ]
+}

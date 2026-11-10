@@ -1,0 +1,5 @@
+{
+  "view_order": "shared",
+  "cache_estimates": true,
+  "probe_inputs": "historical"
+}

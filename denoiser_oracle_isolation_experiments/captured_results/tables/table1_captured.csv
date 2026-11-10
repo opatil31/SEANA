@@ -1,0 +1,4 @@
+condition,sigma_d,noisy,n2n,nsp,drunet_raw,drunet_vst,drunet_vst_minus_nsp
+gauss_high,0.5,9.13,13.46,17.55,16.9,17.96,0.41
+pg_high,0.2,10.75,15.0,18.44,15.97,19.96,1.52
+speckle_high,0.1,11.87,16.0,18.76,13.56,20.13,1.37
