@@ -58,9 +58,9 @@ installation and integration examples.
 
 **Try SEANA interactively: [BBBC048 demo notebook](SEANA_BBBC048_Demo.ipynb)**
 
-[![Open Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/)
+[![Open Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/opatil31/SEANA/blob/main/SEANA_BBBC048_Demo.ipynb)
 
-Open Colab, choose **File → Upload notebook**, and upload the root notebook.
+Click **Open Colab** above to open the demo notebook directly.
 It includes a resampling-strength slider, real fluorescence images, captured
 results, and a live baseline-versus-SEANA SSL comparison using `seana-ssl` from PyPI.
 Both arms default to **50 SSL epochs and 20 linear-probe epochs**, which is less than main paper btw.
