@@ -29,7 +29,7 @@ create two SSL views. Your encoder, SSL objective and remaining augmentation pip
 
 | Learn from noisy data | Use your SSL pipeline | Fit once, reuse |
 | :--- | :--- | :--- |
-| No clean training targets or noise-model specification required. | Generate independent source views before your usual crops, color transforms and normalization. | Pretrained DRUNet is the default. Save the fitted module, or supply your own denoiser. |
+| No clean training targets or noise-model specification required. | Generate independent source views before your usual crops, color transforms and other augmentations. | Pretrained DRUNet denoiser is the calibration default. Save the fitted SEANA module, or supply your own denoiser. |
 
 ## Quick start
 
