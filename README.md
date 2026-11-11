@@ -1,5 +1,9 @@
 <div align="center">
 
+<p>
+  <img src="docs/assets/seana-angel.png" width="180" alt="Pixel-art angel with her feathered wings covering her eyes">
+</p>
+
 <h1>SEANA</h1>
 <p><strong>Self-Aligned Noise Augmentation (SEANA) </strong></p>
 <p>Noise-aligned view generation for Self-Supervised Learning.</p>
