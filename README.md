@@ -1,7 +1,7 @@
 <div align="center">
 
 <p>
-  <img src="docs/assets/seana-angel.png" width="180" alt="Black-and-white pixel-art angel in three-quarter view, with wings emerging from the back of her head and covering her eyes">
+  <img src="docs/assets/seana-angel-monochrome-v2.png" width="180" alt="Black-and-white pixel-art angel in three-quarter view, with wings emerging from the back of her head and covering her eyes">
 </p>
 
 <h1>SEANA</h1>
