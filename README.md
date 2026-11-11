@@ -16,7 +16,7 @@
 </p>
 
 <p>
-  <a href="https://neurips.cc/virtual/2026/loc/sydney/poster/153415">Paper</a> ·
+  <a href="https://opatil31.github.io/assets/papers/seana-neurips-2026.pdf">Paper</a> ·
   <a href="docs/library.md">Library guide</a> ·
   <a href="examples/ssl_pipeline.py">LightlySSL example</a> ·
   <a href="#research-experiments">Experiments</a> ·
@@ -273,7 +273,7 @@ git lfs pull --include="fetal_ultrasound/dataset/fetal_planes_native192_v1.zip"
 Code for **Breaking Noise Shortcuts in Self-Supervised Learning via Noise-Aligned
 View Generation**, by **Oankar R. Patil**.
 
-[Read the paper](https://neurips.cc/virtual/2026/loc/sydney/poster/153415) ·
+[Read the paper](https://opatil31.github.io/assets/papers/seana-neurips-2026.pdf) ·
 [Machine-readable citation](CITATION.cff)
 
 ```bibtex
@@ -281,7 +281,7 @@ View Generation**, by **Oankar R. Patil**.
   title  = {Breaking Noise Shortcuts in Self-Supervised Learning via Noise-Aligned View Generation},
   author = {Patil, Oankar R.},
   year   = {2026},
-  url    = {https://neurips.cc/virtual/2026/loc/sydney/poster/153415}
+  url    = {https://opatil31.github.io/assets/papers/seana-neurips-2026.pdf}
 }
 ```
 
