@@ -95,8 +95,12 @@ Cropping, photometric augmentation and normalization happen **after SEANA**.
 The fitted SEANA module stays frozen while the encoder and projection head train.
 
 `SEANA()` uses frozen pretrained DRUNet, downloading its weights on first use.
-`SEANA(my_denoiser)` uses your own module. The example hyperparameter values sigma_vst (SEANA resampling strength in VST domain) and sigma_d (sigma denoising value supplied to DRUNet) are starting
-values, and need to be tuned for a given noisy dataset. The [library guide](docs/library.md) covers
+`SEANA(my_denoiser)` uses your own module. 
+
+**The example hyperparameter values sigma_vst (SEANA resampling strength in VST domain) and sigma_d (sigma denoising value supplied to DRUNet) are starting
+values, and need to be tuned for a given noisy dataset**. 
+
+The [library guide](docs/library.md) covers
 input scaling, fitting, custom denoisers, resampling strength and checkpoints.
 
 The [runnable LightlySSL example](examples/ssl_pipeline.py) also provides a toy
