@@ -114,7 +114,7 @@ notebook's setup cells to load the repository helpers and prepared dataset.
 ## Research experiments
 
 The full repository includes experiment code, configurations, analysis tools
-and prepared imaging datasets. The library wheel contains the reusable SEANA
+and prepared imaging datasets from my paper. The library wheel contains the reusable SEANA
 core and practitioner API.
 
 **SSL models:** VICReg · SimCLR · BYOL · MoCoV2 · LeJEPA<br>
