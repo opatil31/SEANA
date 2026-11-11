@@ -2,7 +2,7 @@
 
 <h1>SEANA</h1>
 <p><strong>Self-Aligned Noise Augmentation (SEANA) </strong></p>
-<p>Noise-aligned view generation for self-supervised learning.</p>
+<p>Noise-aligned view generation for Self-Supervised Learning.</p>
 
 <p>
   <a href="https://pypi.org/project/seana-ssl/"><img src="https://img.shields.io/pypi/v/seana-ssl?color=2563eb&amp;label=PyPI" alt="PyPI version"></a>
