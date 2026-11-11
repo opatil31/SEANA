@@ -16,7 +16,7 @@
 </p>
 
 <p>
-  <a href="https://opatil31.github.io/assets/papers/seana-neurips-2026.pdf">Paper</a> ·
+  <a href="https://opatil31.github.io/assets/papers/seana-neurips-2026.pdf">NeurIPS'26 Paper</a> ·
   <a href="docs/library.md">Library guide</a> ·
   <a href="examples/ssl_pipeline.py">LightlySSL example</a> ·
   <a href="#research-experiments">Experiments</a> ·
