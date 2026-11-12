@@ -115,7 +115,7 @@ The [BBBC048 notebook](SEANA_BBBC048_Demo.ipynb) brings the pipeline to real
 fluorescence microscopy images. Explore the resampling-strength slider and a
 baseline-versus-SEANA SSL comparison using the package from PyPI.
 
-**Demo budget:** 50 SSL epochs and 20 linear-probe epochs per arm. These are
+**Demo budget:** 70 SSL epochs and 50 linear-probe epochs per arm. These are
 shorter demonstration runs than the paper's training recipes. Follow the
 notebook's setup cells to load the repository helpers and prepared dataset.
 

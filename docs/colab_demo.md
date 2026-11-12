@@ -35,18 +35,18 @@ repository can instead enter its public HTTPS GitHub URL in the first cell or
 upload GitHub's **Download ZIP**. The first cell verifies bundle checksums; dataset
 extraction independently checks the pinned dataset hash and all image members.
 
-The README's Colab badge currently opens Colab's home page because no public
-repository URL is assigned. Once the repository exists, point the badge directly
-to `https://colab.research.google.com/github/OWNER/REPO/blob/BRANCH/SEANA_BBBC048_Demo.ipynb`
-and set the notebook's default `REPO_URL` to that repository. The upload path
-continues to work without that change.
+The README's Colab buttons open a specific saved revision of the notebook using
+its commit in the URL. When publishing notebook changes, update both buttons to
+the new notebook commit. The notebook's default `REPO_URL` is
+`https://github.com/opatil31/SEANA`, which supplies the current experiment helpers
+and dataset. The upload path remains available.
 
 ## What the demo measures
 
 The quick preset uses 8,192 training cells sampled proportionally within the
 fixed seed-0 training split, and all 6,453 test cells. It uses 500 VST steps,
-50 SSL epochs and 20 linear-probe epochs per arm. The long preset uses all 25,813 training cells
-and 5,000 VST steps, with the same 50/20 epoch defaults. The notebook's `SSL_EPOCHS`
+70 SSL epochs and 50 linear-probe epochs per arm. The long preset uses all 25,813 training cells
+and 5,000 VST steps, with the same 70/50 epoch defaults. The notebook's `SSL_EPOCHS`
 and `PROBE_EPOCHS` controls let users change these budgets independently of the
 data preset. Both use ResNet-18 and
 cached/shared SEANA estimates with independent fresh noise after cropping. This

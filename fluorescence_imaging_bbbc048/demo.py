@@ -32,8 +32,8 @@ def recipe(
     seed=0,
     sigma=0.8,
     device="cuda",
-    ssl_epochs=50,
-    probe_epochs=20,
+    ssl_epochs=70,
+    probe_epochs=50,
 ):
     """Presets select training cells and VST steps; epoch controls apply to both arms."""
     if preset not in ("quick", "long"):
