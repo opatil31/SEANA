@@ -350,7 +350,7 @@ def compare(cfg, train, test, dataset, treatment, output, device):
         treatment_sha256=fitted["treatment_sha256"],
         delta_percentage_points={
             key: 100 * (rows[1]["final"][key] - rows[0]["final"][key])
-            for key in ("accuracy", "balanced_accuracy", "macro_f1")
+            for key in ("accuracy", "macro_f1")
         },
     )
     write_json(output / "demo_results.json", result)
@@ -362,30 +362,24 @@ def plot_results(result):
     import numpy as np
 
     rows = result["runs"]
-    metrics = ("accuracy", "balanced_accuracy", "macro_f1")
-    fig, axes = plt.subplots(1, 2, figsize=(12, 4), constrained_layout=True)
+    metrics = ("accuracy", "macro_f1")
+    positions = np.arange(len(metrics))
+    fig, ax = plt.subplots(figsize=(6, 4), constrained_layout=True)
     for offset, row in zip((-0.18, 0.18), rows):
-        axes[0].bar(
-            np.arange(3) + offset,
+        ax.bar(
+            positions + offset,
             [100 * row["final"][k] for k in metrics],
             width=0.36,
             label=row["treatment"].upper(),
         )
-    axes[0].set(
-        xticks=np.arange(3),
-        xticklabels=["Accuracy", "Balanced accuracy", "Macro-F1"],
+    ax.set(
+        xticks=positions,
+        xticklabels=["Top-1 accuracy", "Macro-F1"],
         ylim=(0, 100),
         ylabel="Held-out score (%)",
         title="This run: final frozen probes",
     )
-    axes[0].legend()
-    for row in rows:
-        axes[1].plot(
-            PHASES, [100 * v for v in row["final"]["per_class_recall"]], "o-", label=row["treatment"].upper()
-        )
-    axes[1].set(ylim=(0, 100), ylabel="Recall (%)", title="Per-phase recall; rare phases have few test cells")
-    axes[1].tick_params(axis="x", labelrotation=35)
-    axes[1].legend()
+    ax.legend()
     return fig
 
 

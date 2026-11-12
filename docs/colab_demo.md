@@ -9,7 +9,7 @@ The root [SEANA_BBBC048_Demo.ipynb](../SEANA_BBBC048_Demo.ipynb) provides:
 - An interactive comparison of acquired images, DRUNet alone, the learned-VST
   estimate and independently resampled views, plus a plot of the learned transform.
 - A matched baseline/SEANA experiment with all five SSL models available.
-  Final frozen probes report accuracy, balanced accuracy, macro-F1 and phase recall.
+  The results chart and printed summary show Top-1 accuracy and macro-F1.
 - A compact downloadable record with metrics, memberships, settings, source and
   environment hashes, and the comparison figure.
 
