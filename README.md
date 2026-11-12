@@ -6,7 +6,7 @@
 
 <h1>SEANA</h1>
 <p><strong>Self-Aligned Noise Augmentation (SEANA) </strong></p>
-<p>Noise-aligned view generation for Self-Supervised Learning (SSL).</p>
+<p>Noise-aligned view generation for Noise-Robust Self-Supervised Learning (SSL).</p>
 
 <p>
   <a href="https://pypi.org/project/seana-ssl/"><img src="https://img.shields.io/pypi/v/seana-ssl?color=2563eb&amp;label=PyPI" alt="PyPI version"></a>
@@ -26,7 +26,7 @@
 
 </div>
 
-SEANA is a drop-in view generation module for joint-embedding SSL on noisy images.
+SEANA is a drop-in view generation module for joint-embedding SSL on noisy images for noise-robust representation learning.
 It learns an invertible variance-stabilizing transform from noisy training data,
 estimates the clean signal with a frozen denoiser, and resamples independent noise to
 create two noise-aware SSL views. Your encoder, SSL objective, and remaining augmentation pipeline stay the same. You don't need to train a dataset-specific denoiser and then also you don't need to use a denoiser or SEANA module at inference :)
