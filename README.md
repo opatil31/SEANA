@@ -12,7 +12,7 @@
   <a href="https://pypi.org/project/seana-ssl/"><img src="https://img.shields.io/pypi/v/seana-ssl?color=2563eb&amp;label=PyPI" alt="PyPI version"></a>
   <a href="pyproject.toml"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&amp;logoColor=white" alt="Python 3.10 or newer"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/SEANA_core-MIT-0f766e" alt="SEANA core: MIT license"></a>
-  <a href="https://colab.research.google.com/github/opatil31/SEANA/blob/main/SEANA_BBBC048_Demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open demo in Colab"></a>
+  <a href="https://colab.research.google.com/github/opatil31/SEANA/blob/6350a61a9b43ec0100496cc58637a158eb17cccb/SEANA_BBBC048_Demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open demo in Colab"></a>
 </p>
 
 <p>
@@ -109,7 +109,7 @@ dataset and checkpoint saving. From a repository checkout, run
 
 ## Try the Colab demo
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/opatil31/SEANA/blob/main/SEANA_BBBC048_Demo.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/opatil31/SEANA/blob/6350a61a9b43ec0100496cc58637a158eb17cccb/SEANA_BBBC048_Demo.ipynb)
 
 The [BBBC048 notebook](SEANA_BBBC048_Demo.ipynb) brings the pipeline to real
 fluorescence microscopy images. Explore the resampling-strength slider and a
