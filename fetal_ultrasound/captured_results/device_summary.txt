@@ -1,4 +1,4 @@
-TEST device support: seen(E6+Aloka)=4143  S10=1071  (E6=2406 Aloka=1737)
+TEST device (ultrasound machines, seen is in-disb) support: seen(E6+Aloka)=4143  S10=1071  (E6=2406 Aloka=1737)
   method     treat  n | mine-ovr reported |    seen     S10 | S10-seen
     byol  baseline  3 |   75.06%   75.04% |  79.77%  57.21% | -22.56
     byol       NSP  (no backbone: byol_nsp_native192)
