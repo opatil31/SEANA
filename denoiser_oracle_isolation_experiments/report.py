@@ -1,5 +1,3 @@
-"""Regenerate captured rebuttal tables, or summarize new isolation runs."""
-
 import argparse
 import csv
 import hashlib
