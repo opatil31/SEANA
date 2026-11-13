@@ -1,7 +1,0 @@
-condition,baseline_noise_variance_fraction,seana_noise_variance_fraction,relative_change_pct,baseline_n_checkpoints,seana_n_checkpoints,baseline_members,seana_members,aggregation
-gauss_low,0.02116841331154805,0.012643295643415726,-40.272823204380636,3,3,byol:s0|simclr:s0|vicreg:s0,byol:s0|simclr:s0|vicreg:s0,all_available_checkpoints
-gauss_high,0.11473919395424478,0.06298437955500641,-45.1064824630692,6,6,byol:s0|byol:s1|simclr:s0|simclr:s1|vicreg:s0|vicreg:s1,byol:s0|byol:s1|simclr:s0|simclr:s1|vicreg:s0|vicreg:s1,all_available_checkpoints
-pg_low,0.026210686384491252,0.019515856554496544,-25.54236745954127,3,3,byol:s0|simclr:s0|vicreg:s0,byol:s0|simclr:s0|vicreg:s0,all_available_checkpoints
-pg_high,0.0792259554672755,0.05085404172045415,-35.811387290293325,6,3,byol:s0|byol:s1|simclr:s0|simclr:s1|vicreg:s0|vicreg:s1,byol:s0|simclr:s0|vicreg:s0,all_available_checkpoints
-speckle_low,0.020319139038183966,0.015594446295043177,-23.252425874256243,3,3,byol:s0|simclr:s0|vicreg:s0,byol:s0|simclr:s0|vicreg:s0,all_available_checkpoints
-speckle_high,0.0512628829958654,0.03595030208706801,-29.870697888826157,9,9,byol:s0|byol:s1|byol:s2|simclr:s0|simclr:s1|simclr:s2|vicreg:s0|vicreg:s1|vicreg:s2,byol:s0|byol:s1|byol:s2|simclr:s0|simclr:s1|simclr:s2|vicreg:s0|vicreg:s1|vicreg:s2,all_available_checkpoints
