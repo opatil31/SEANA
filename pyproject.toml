@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "seana-ssl"
-version = "0.1.4"
+version = "0.1.5"
 description = "Noise-aligned view generation for self-supervised learning"
 readme = "docs/library.md"
 requires-python = ">=3.10"

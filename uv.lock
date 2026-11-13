@@ -4543,7 +4543,7 @@ wheels = [
 
 [[package]]
 name = "seana-ssl"
-version = "0.1.4"
+version = "0.1.5"
 source = { editable = "." }
 default-groups = []
 dependencies = [
