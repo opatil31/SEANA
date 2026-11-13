@@ -1,4 +1,4 @@
-"""Controlled denoiser estimates, independent resampling and oracle data paths."""
+"""Controlled denoiser estimates, independent resampling and oracle differing data paths."""
 
 import hashlib
 import io
