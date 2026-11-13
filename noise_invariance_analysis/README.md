@@ -21,7 +21,7 @@ noise_variance_fraction = S_W / (S_W + S_B) = 1 - eta_squared
 This exactly describes the captured `ndv` column. It is the complement of the
 ANOVA explained-variation fraction, **not the conventional one-way ICC(1,1)**.
 The identity follows from `SS_within = N*K*S_W`, `SS_between = N*K*S_B` and
-`SS_total = SS_within + SS_between`; see the
+`SS_total = SS_within + SS_between`, see the
 [NIST one-way ANOVA definitions](https://www.itl.nist.gov/div898/handbook/ppc/section2/ppc231.htm).
 
 ## Analyze a release checkpoint
