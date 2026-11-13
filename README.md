@@ -221,9 +221,15 @@ uv run --no-sync python -m fluorescence_imaging_bbbc048.dataset_archive extract 
   --archive fluorescence_imaging_bbbc048/dataset/bbbc048_merged_v1.zip \
   --output data/bbbc048
 uv run --no-sync python -m fluorescence_imaging_bbbc048.train \
-  --method vicreg --treatment seana --manifest data/bbbc048/manifest.json \
+  --config fluorescence_imaging_bbbc048/configs/vicreg.json \
   --output-dir runs/bbbc048_example
 ```
+
+Use the [method-specific JSON recipes](fluorescence_imaging_bbbc048/configs/README.md)
+for SimCLR, VICReg, BYOL, MoCoV2 and LeJEPA. Each contains training flags for a
+fresh run, including SEANA and denoiser fitting settings. Use `--backbone resnet50`
+to change the backbone. Set `--treatment` to `baseline`, `nsp` or `n2n` to select
+another comparison.
 
 The default grid has **90 runs** on ResNet-18: 5 methods × 6 treatments ×
 3 seeds. Selecting both backbones gives 180 runs. The
@@ -245,13 +251,19 @@ Retrieve the prepared archive with Git LFS first, as described below.
 uv run --no-sync python -m fetal_ultrasound.dataset_archive extract \
   --archive fetal_ultrasound/dataset/fetal_planes_native192_v1.zip --output data/fetal
 uv run --no-sync python -m fetal_ultrasound.train \
-  --method simclr --treatment seana --cache-estimates \
-  --manifest data/fetal/manifest.json --output-dir runs/fetal_example
+  --config fetal_ultrasound/configs/simclr.json \
+  --output-dir runs/fetal_example
 uv run --no-sync python -m fetal_ultrasound.evaluate --run runs/fetal_example --device cuda
 ```
 
-See [fetal_ultrasound/configs/](fetal_ultrasound/configs/) for backbone recipes,
-patient-validation splits and resampling-strength selection.
+See the [method-specific JSON recipes](fetal_ultrasound/configs/README.md) for all
+five SSL methods, patient-validation flags and resampling-strength selection.
+Add `--backbone resnet50` for ResNet-50. For the baseline, use
+`--treatment baseline --no-cache-estimates`; NSP and N2N use `--treatment nsp`
+and `--treatment n2n`.
+
+For both datasets, extraction creates the dataset `manifest.json` that identifies
+images and labels. The training recipes use this data index and fit new models.
 
 </details>
 
