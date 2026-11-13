@@ -33,7 +33,7 @@ create two noise-aware SSL views. Your encoder, SSL objective, and remaining aug
 
 | Learn from noisy data | Use your SSL pipeline | Fit once, reuse |
 | :--- | :--- | :--- |
-| No clean training targets or noise-model specification required. | Generate independent noise-aware source views before your usual crops, color transforms and other augmentations. | Pretrained DRUNet denoiser is the calibration default used by SEANA. Save the fitted SEANA module. Feel free to supply your own custom denoiser for SEANA calibration. |
+| No clean training targets, noise-model specification, or training a dataset-specific denoiser required. | Generate independent noise-aware source views before your usual crops, color transforms and other augmentations. | Pretrained DRUNet denoiser is the calibration default used by SEANA. Save the fitted SEANA module. Feel free to supply your own custom denoiser for SEANA calibration. |
 
 ## Quick start
 
