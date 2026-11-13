@@ -1,6 +1,12 @@
-# Self-Aligned Noise Augmentation (SEANA) for your SSL pipeline
+# Self-Aligned Noise Augmentation (SEANA)
 
-SEANA (Self-Aligned Noise Augmentation) is a noise-aware view generation and SSL augmentation module that learns a variance-stabilizing transform for noisy image data and generates independently resampled (noise-aware) views for self-supervised learning. It is a plug-and-play module that works with any joint-embedding SSL approach and can be plugged directly into typical augmentation / view generation pipelines used in SSL. Further details are available below and in the [NeurIPS'26 publication](https://neurips.cc/virtual/2026/loc/sydney/poster/153415).
+## Noise-aligned view generation for Noise-Robust Self-Supervised Learning (SSL)
+
+SEANA is a drop-in view generation module for joint-embedding SSL on noisy images for noise-robust representation learning. It learns an invertible variance-stabilizing transform from noisy training data, estimates the clean signal with a frozen denoiser, and resamples independent noise to create two noise-aware SSL views. Your encoder, SSL objective, and remaining augmentation pipeline stay the same. You don't need to train a dataset-specific denoiser and then also you don't need to use a denoiser or SEANA module at inference. Further details are available below and in the [NeurIPS'26 publication](https://neurips.cc/virtual/2026/loc/sydney/poster/153415).
+
+| Learn from noisy data | Use your SSL pipeline | Fit once, reuse |
+| :--- | :--- | :--- |
+| No clean training targets or noise-model specification required. | Generate independent noise-aware source views before your usual crops, color transforms and other augmentations. | Pretrained DRUNet denoiser is the calibration default used by SEANA. Save the fitted SEANA module. Feel free to supply your own custom denoiser for SEANA calibration. |
 
 Author: **Oankar R. Patil**.
 
@@ -34,160 +40,90 @@ PyTorch and DeepInverse, so `SEANA()` works without an extra dependency flag.
 Constructing it loads cached pretrained weights or downloads them on first use.
 Importing `seana` alone does not load DeepInverse or download weights.
 Passing `SEANA(my_denoiser)` uses your module without loading DRUNet.
-The old `seana-ssl[drunet]` install spelling remains supported for compatibility.
 
-Choose the PyTorch CPU/CUDA build appropriate for your environment. The library
-does not impose a CUDA index. See [uv's PyTorch guide](https://docs.astral.sh/uv/guides/integration/pytorch/).
-Python 3.10+ is required. Research dependencies retain their Python 3.12 recipe.
+## Quick start
 
-To reproduce this package release, pin `seana-ssl==0.1.3` in your environment.
+Install SEANA and LightlySSL into a uv project:
 
-## Fit once, generate views
+```bash
+uv add seana-ssl lightly torchvision
+```
+
+With pip, use `python -m pip install seana-ssl lightly torchvision`. The SEANA
+package is **`seana-ssl`**, and the Python import is **`seana`**. Python 3.10+
+is supported.
+
+This LightlySSL SimCLR example fits SEANA once, then runs one SSL training epoch.
+Supply `noisy_train_loader` with batches of original noisy images as floating
+tensors in [0, 1], shaped `[B, 3, H, W]`, followed by labels or other metadata.
+Use at least two images per batch. Keep SSL augmentations and encoder
+normalization out of this loader:
 
 ```python
 import torch
-from seana import SEANA
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-seana = SEANA(
-    sigma_d=0.08,       # Gaussian denoiser's noise-level input
-    sigma_vst=0.1,      # Resampling standard deviation in VST space
-    channels=3,
-    device=device,
-)
-
-# train_loader yields raw floating [B,3,H,W] images, optionally followed by labels.
-# Fit on training images only, before ImageNet/encoder mean-std normalization.
-seana.fit(train_loader, steps=5000, patch_size=64, seed=0)
-
-for images, _ in train_loader:
-    source_a, source_b = seana(images.to(device))
-    # Apply independent SSL transforms to each source, as shown below.
-```
-
-These noise levels demonstrate the API. Appropriate values depend on the dataset,
-fitted transform and SSL objective. The library does not automatically tune them
-against downstream labels. `sigma_d` and `sigma_vst` have different roles.
-
-`SEANA()` defaults to RGB DRUNet on CPU with `sigma_d=20/255` and `sigma_vst=0.05`.
-Set `channels=1` to use the pretrained grayscale model. For an offline machine,
-pass `pretrained="/path/to/drunet_color.pth"` with compatible local weights.
-`SEANA.from_drunet(...)` remains available as an explicit factory for the same
-denoiser. Setting `pretrained=None` explicitly creates an untrained DRUNet for
-testing and is not a substitute for pretrained denoising.
-
-Calling `seana(images)` denoises once and returns two independent noise draws
-**at the same spatial geometry**. It does not add an implicit crop or normalization
-policy. For a dataset of already-noisy images, use this order:
-
-**Original noisy image → SEANA denoising and independent resampling → independent
-SSL crops/photometric transforms → encoder normalization → SSL model.**
-
-The fitting loader and the SSL source loader should yield original noisy images,
-converted to floating tensors at the intended intensity scale, before SSL
-augmentations. Apply your single-view transforms to the two SEANA outputs:
-
-```python
-source_a, source_b = seana(images)
-view_a = torch.stack([ssl_view_a(image) for image in source_a])
-view_b = torch.stack([ssl_view_b(image) for image in source_b])
-loss = ssl_loss(encoder(view_a), encoder(view_b))
-loss.backward()
-```
-
-Here `ssl_view_a` and `ssl_view_b` are your single-view augmentation pipelines,
-including normalization as their last step. They can share a stochastic transform
-or use different branch settings, as in BYOL. Calling them per image gives
-independent transform draws across examples as well as across branches.
-
-This order lets SEANA denoise the original acquisition noise before resizing,
-blur or color operations alter it. Those operations then act on the resampled
-sources, so noise after the SSL transforms need not retain its pre-transform
-statistics. A crop without interpolation or a flip preserves retained pixel
-values, but a crop still changes the denoiser's available context.
-
-The API also permits `.augment(crop)` for an explicitly chosen alternate protocol,
-but SEANA should be integrated into augmentation pipelines in the order described
-above.
-
-## LightlySSL integration
-
-Use a **single-view** Lightly transform on each independently resampled source.
-Its normal final normalization can stay enabled because SEANA runs first:
-
-```python
+from torch import nn
+from torchvision.models import resnet18
+from lightly.loss import NTXentLoss
+from lightly.models.modules import SimCLRProjectionHead
 from lightly.transforms import SimCLRViewTransform
 from seana import SEANA
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-seana = SEANA(
-    sigma_d=0.08,       # Gaussian denoiser's noise-level input
-    sigma_vst=0.1,      # Resampling standard deviation in VST space
-    channels=3,
-    device=device,
-)
 
-# train_loader yields raw floating [B,3,H,W] images, optionally followed by labels.
-# Fit on training images only, before ImageNet/encoder mean-std normalization.
-seana.fit(raw_train_loader, steps=5000, patch_size=64, seed=0)
+# Fit once on the training split. Labels are ignored.
+augmenter = SEANA(sigma_d=0.08, sigma_vst=0.1, device=device)
+augmenter.fit(noisy_train_loader, steps=5000, patch_size=64, seed=0)
 
+# Set up a standard LightlySSL SimCLR pipeline.
 ssl_view = SimCLRViewTransform(input_size=224)
-for images, _ in raw_train_loader:
-    source_a, source_b = seana(images.to(device))
+resnet = resnet18(weights=None)
+model = nn.Sequential(
+    *list(resnet.children())[:-1],
+    nn.Flatten(1),
+    SimCLRProjectionHead(512, 512, 128),
+).to(device).train()
+criterion = NTXentLoss(temperature=0.5)
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+
+for images, *_ in noisy_train_loader:
+    # SEANA first, then independent Lightly augmentations for each source.
+    source_a, source_b = augmenter(images.to(device))
     view_a = torch.stack([ssl_view(image) for image in source_a])
     view_b = torch.stack([ssl_view(image) for image in source_b])
-    loss = ssl_loss(encoder(view_a), encoder(view_b))
+
+    optimizer.zero_grad(set_to_none=True)
+    loss = criterion(model(view_a), model(view_b))
     loss.backward()
+    optimizer.step()
 ```
 
-`SimCLRViewTransform` includes crop/resize, flipping, color jitter, grayscale,
-blur and normalization. Tensor inputs require torchvision transforms v2, available
-in the tested torchvision 0.20.1 / Lightly 1.5.25 research environment.
-See the [Lightly transform API](https://docs.lightly.ai/self-supervised-learning/lightly.transforms.html#lightly.transforms.simclr_transform.SimCLRViewTransform).
-Keep the raw-image loader free of the usual two-view dataset transform and run
-SEANA in the training process, after batching. Using one SEANA noise draw as the
-shared input to a two-view `SimCLRTransform` would share that draw across both
-views, so it is not the independent-resampling path shown above.
+Cropping, photometric augmentation and normalization happen **after SEANA**.
+The fitted SEANA module stays frozen while the encoder and projection head train.
 
-The augmenter stays in evaluation mode with frozen parameters, even when it is
-a child of a module on which `.train()` is called. Its outputs are detached
-regular tensors, so the encoder still receives parameter gradients. Do not put
-the complete SSL encoder/loss computation inside `torch.no_grad()`.
+`SEANA()` uses frozen pretrained DRUNet, downloading its weights on first use.
+`SEANA(my_denoiser)` uses your own module.
 
-A complete **LightlySSL SimCLR + SEANA** example is included in the repository:
+**The example hyperparameter values sigma_vst (SEANA resampling strength in VST domain) and sigma_d (sigma denoising value supplied to DRUNet) are starting
+values, and need to be tuned for a given noisy dataset**.
 
-```bash
-uv run --python 3.12 --extra experiments examples/ssl_pipeline.py
-```
+The [library guide](https://github.com/opatil31/SEANA/blob/main/docs/library.md) covers
+input scaling, fitting, custom denoisers, resampling strength and checkpoints.
 
-It fits SEANA using pretrained DRUNet, generates two independent sources, then
-applies Lightly's `SimCLRViewTransform` to each. A ResNet-18 backbone and
-`SimCLRProjectionHead` train with Lightly's `NTXentLoss`. Only the SSL model is
-optimized during this stage. SEANA stays frozen, and normalization happens after
-SEANA. For GPU execution:
+The [runnable LightlySSL example](https://github.com/opatil31/SEANA/blob/main/examples/ssl_pipeline.py) also provides a toy
+dataset and checkpoint saving. From a repository checkout, run
+`uv run --python 3.12 --extra experiments examples/ssl_pipeline.py`.
 
-```bash
-uv run --python 3.12 --extra experiments examples/ssl_pipeline.py --device cuda
-```
+## Try the Colab demo
 
-The default uses 16 synthetic 32x32 tensors, two VST fitting steps, and one SSL
-epoch to demonstrate integration. It is not a performance experiment. Replace
-the loader with your noisy training images and set `--fit-steps` and `--epochs`
-for your experiment. The raw loader should yield images before SSL transforms
-or normalization. Labels and filenames, if present, are ignored.
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/opatil31/SEANA/blob/6350a61a9b43ec0100496cc58637a158eb17cccb/SEANA_BBBC048_Demo.ipynb)
 
-For a download-free check with a toy averaging denoiser instead of DRUNet:
+The [BBBC048 notebook](https://github.com/opatil31/SEANA/blob/main/SEANA_BBBC048_Demo.ipynb) brings the pipeline to real
+fluorescence microscopy images. Explore the resampling-strength slider and a
+baseline-versus-SEANA SSL comparison using the package from PyPI.
 
-```bash
-uv run --python 3.12 --extra experiments examples/ssl_pipeline.py --smoke \
-  --checkpoint runs/library_example/smoke_seana.pt
-```
-
-The example saves and verifies a fitted SEANA checkpoint. Choose a new
-`--checkpoint` path when rerunning it. Lightly is required by this example and
-remains optional for the core library.
-
-The root BBBC048 notebook provides a real-data demo in the full repository.
+**Demo budget:** 70 SSL epochs and 50 linear-probe epochs per arm. These are
+shorter demonstration runs than the paper's training recipes. Follow the
+notebook's setup cells to load the repository helpers and prepared dataset.
 
 ## Supply your own denoiser
 
@@ -226,7 +162,7 @@ seana.fit(train_loader, calibrate=False, steps=5000, patch_size=64,
 ```
 
 The default spline has 128 knots and uses the captured global fitting objective.
-Use `variant="conditional"` for the captured conditional VST, with the correct
+Use `variant="conditional"` for the conditional VST, with the correct
 `channels` specified at construction. Existing low-level imports
 `GlobalNoise2VST`, `ConditionalGlobalNoise2VST` and `DeepInvDRUNetWrapper` remain
 available for research code.
@@ -285,19 +221,12 @@ uv lock --check
 uv build
 ```
 
-`uv.lock` records the checkout's dependency resolution. Consumer projects resolve the
-package dependency bounds in their own environment, using their own lockfile.
-
 For the complete research checkout:
 
 ```bash
 uv sync --python 3.12 --extra experiments --extra imagenet100 --extra bbbc048 \
   --extra demo --group notebooks
 ```
-
-Legacy `requirements*.txt` files retain the research/Colab installation paths.
-Run experiment scripts from the full checkout. Installing the core into another
-project does not install those scripts or datasets.
 
 Original SEANA code is MIT licensed. Dependencies, pretrained weights and the
 repository's comparison methods/datasets retain their own terms. Please cite

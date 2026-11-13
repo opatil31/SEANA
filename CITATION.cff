@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use SEANA, please cite the accompanying paper. Publication metadata will be updated for the camera-ready release."
 type: software
 title: "SEANA: Noise-Aligned View Generation for Self-Supervised Learning"
-version: 0.1.3
+version: 0.1.4
 authors:
   - family-names: Patil
     given-names: Oankar R.

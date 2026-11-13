@@ -11,7 +11,7 @@ from typing import Callable, Iterable
 import torch
 from torch import nn
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 _DEFAULT_SIGMA_D = 20 / 255
 
 
